@@ -66,13 +66,14 @@ CREATE or REPLACE FUNCTION sqltools.GETOBJNAME(
         set R.OBJNAME = strip(OBJECT_NAME,L,' ');
       end if;
 
-     if (OBJTYPE is NOT NULL and OBJTYPE <> '') THEN
+    if (OBJTYPE is NOT NULL and OBJTYPE <> '') THEN
        set R.OBJ_TYPE = upper(OBJTYPE);
        set R.OBJ_TYPE = strip(R.OBJ_TYPE,B,' ');
      end if;
-     if (R.OBJ_TYPE in ('*SAVF','SAVF')) THEN
+     if (OBJTYPE is NULL or R.OBJ_TYPE in ('*SAVF','SAVF') or
+         R.OBJ_TYPE = '') THEN
        set R.OBJ_TYPE = '*FILE';
-     end if;
+     end if;           
 
        -- Strip off any leading asterisk
      if (LEFT(R.OBJ_TYPE,1) = '*') THEN
