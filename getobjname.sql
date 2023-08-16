@@ -20,8 +20,7 @@ CREATE or REPLACE FUNCTION sqltools.GETOBJNAME(
        SPECIFIC ST_OBJNAME
        CARDINALITY 1
 
-        set option datfmt = *ISO, commit=*NONE,
-          BINDOPT = 'BNDSRVPGM(SQLTOOLS/SQLTOOLS)'
+        set option datfmt = *ISO, commit=*NONE
 
  R: BEGIN
 
